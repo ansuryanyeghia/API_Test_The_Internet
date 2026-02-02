@@ -15,7 +15,6 @@ public class ModifyPosts {
     @Test
     public void validatePatchCreation() {
         Post post = new Post(2, "Modified", 111);
-//        String jsonStringObject = RequestUtils.getJsonStringByObject(post);
         RequestUtils.patch(patchSpec, "/posts/{id}", 2);
         int actualStatusCode = ResponseUtils.getStatusCode();
         Assertions.assertEquals(200, actualStatusCode);

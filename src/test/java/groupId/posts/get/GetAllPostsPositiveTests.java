@@ -36,7 +36,7 @@ public class GetAllPostsPositiveTests {
 
     @Test
     public void validateGetPostsById() {
-        RequestUtils.get(getSpec,"/posts", 1);
+        RequestUtils.get(getSpec,"/posts/{id}", 1);
         PostsRoot objectByJsonString = ResponseUtils.getObjectByJsonString(PostsRoot.class);
 
         ResponseUtils.getStringValueByJsonPath("id");

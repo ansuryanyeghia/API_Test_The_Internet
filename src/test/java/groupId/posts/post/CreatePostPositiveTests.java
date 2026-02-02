@@ -37,23 +37,22 @@ public class CreatePostPositiveTests {
     @ParameterizedTest
     @CsvSource(
             {
-                    "412, 'New Post412', 44",
-                    "512, 'New Post512', 55"
+                    "108, 'New Post108', 44",
+                    "208, 'New Post208', 55"
             }
     )
     public void validateTwoPostCreation(int id, String title, int views) {
         Post actualResponse = new Post(id, title, views);
         String jsonStringObject = RequestUtils.getJsonStringByObject(actualResponse);
-        RequestUtils.post(postSpec, "/posts", jsonStringObject);
+        RequestUtils.post(postSpec, "/posts/{id}", jsonStringObject, id);
         int actualStatusCode = ResponseUtils.getStatusCode();
         Assertions.assertEquals(201, actualStatusCode);
 
-        RequestUtils.get(getSpec, "/posts", id);
+        RequestUtils.get(getSpec, "/posts/{id}", id);
         int getStatusCode = ResponseUtils.getStatusCode();
         Assertions.assertEquals(200, getStatusCode, "GET /posts/{id} did not return 200");
         Post expectedResponse = ResponseUtils.getObjectByJsonString(Post.class);
         Assertions.assertEquals(actualResponse, expectedResponse);
-
     }
 
 }

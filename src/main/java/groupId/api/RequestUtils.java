@@ -27,13 +27,11 @@ public final class RequestUtils {
     }
 
     public static void get(RequestSpecification spec, String endpoint, int id) {
-
         response = given()
                 .when()
                 .spec(spec)
-                .get(endpoint + id)
+                .get(endpoint, id)
                 .then();
-
     }
 
     public static void post(RequestSpecification spec, String endpoint, String body) {
@@ -43,6 +41,15 @@ public final class RequestUtils {
                 .spec(spec)
                 .body(body)
                 .post(endpoint)
+                .then();
+    }
+
+    public static void post(RequestSpecification spec, String endpoint, String body, int id) {
+        response = given()
+                .when()
+                .spec(spec)
+                .body(body)
+                .post(endpoint, id)
                 .then();
     }
 
